@@ -5,13 +5,14 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
 import jdbc.Person;
 import jdbc.PersonDao;
 
 public class HibernatePersonDao implements PersonDao {
-	
+
 	private SessionFactory factory;
 
 	@Override
@@ -22,20 +23,22 @@ public class HibernatePersonDao implements PersonDao {
 
 	@Override
 	public void save(Person person) {
-		// TODO Auto-generated method stub
-		
+		Session session = factory.getCurrentSession();
+		Transaction tx = session.beginTransaction();
+		session.save(person);
+		tx.commit();
 	}
 
 	@Override
 	public void update(Person person) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(Person person) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
